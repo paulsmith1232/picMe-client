@@ -26,7 +26,6 @@ const PostMain = ({postData}) => {
               Comments
             </Header>
             <Comment>
-              <Comment.Avatar src='' />
               <Comment.Content>
                 <Comment.Author as='a'>Matt</Comment.Author>
                 <Comment.Metadata>

@@ -36,7 +36,8 @@ const SignUp = () => {
     axios(config)
       .then(function (response) {
         localStorage.setItem("my_user_token", response.data.token);
-        navigate("/home");
+        console.log(response);
+       // navigate("/home");
       })
       .catch(function (error) {
         console.log(error);
@@ -59,7 +60,7 @@ const SignUp = () => {
         >
           PicMe
         </Header>
-        <Form size="large">
+        <Form size="large" onSubmit={onSubmit}>
           <Segment stacked>
             <Form.Input
               fluid

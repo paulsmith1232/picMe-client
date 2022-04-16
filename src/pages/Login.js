@@ -37,7 +37,8 @@ const Login = () => {
     axios(config) // uses axios to send the request to the server
       .then(function (response) {
         localStorage.setItem("my_user_token", response.data.token); // takes the response data's token and stores it in localstorage
-        navigate("/home");
+        console.log(response);
+       // navigate("/home");
       })
       .catch(function (error) {
         console.log(error);
@@ -60,7 +61,7 @@ const Login = () => {
         >
           PicMe
         </Header>
-        <Form size="large">
+        <Form size="large" onSubmit={onSubmit}>
           <Segment stacked>
             <Form.Input
               fluid

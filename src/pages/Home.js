@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import HomeNavbar from '../components/HomeNavbar';
 import PostMain from '../components/PostMain';
+import Comment from '../components/Comment';
+import AddPost from '../components/AddPost';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ShowContext } from '../components/showContext';
+import { Button } from 'semantic-ui-react';
 
 
 
@@ -54,41 +58,66 @@ const Home = () => {
   const [posts, setPosts] = React.useState(null);
   const [userName, setUsername] = useState("");
 
+  const [showComments, toggleComments] = useState(false);
+  const [showAddPosts, toggleAddPost] = useState(false);
+
+
 
   useEffect(() => {
     var token = localStorage.getItem("my_user_token");
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace("-", "+").replace("_", "/");
-    setUsername(JSON.parse(atob(base64)).username);
-    var config = {
-      method: "get",
-      url: `${process.env.REACT_APP_BE}/posts`,
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("my_user_token")}`
-      }
-    };
+    if(token){
+      console.log(token)
+    }
+    // var base64Url = token.split(".")[1];
+    // var base64 = base64Url.replace("-", "+").replace("_", "/");
+    // setUsername(JSON.parse(atob(base64)).username);
+    // var config = {
+    //   method: "get",
+    //   url: `${process.env.REACT_APP_BE}/posts`,
+    //   headers: {
+    //     Authorization: `Bearer ${localStorage.getItem("my_user_token")}`
+    //   }
+    // };
 
-    axios(config)
-      .then(function (response) {
-        setPosts(response.data);
-      })
-      .catch(function (error) {
-        navigate("/");
-        console.log(error);
-      });
-  }, []);
+    // axios(config)
+    //   .then(function (response) {
+    //     setPosts(response.data);
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     navigate("/");
+    //     console.log(error);
+    //   });
+  }, [showAddPosts]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("my_user_token");
+    navigate("/");
+  };
 
   const renderedPostList = postData.map((post) => {
     return <PostMain key={post.id} postData={post} />
   })
 
   return (
-    <div>
-      <p>{!posts ? "Loading..." : posts}</p>
-      <HomeNavbar />
-      {renderedPostList}
-
-    </div>
+    <ShowContext.Provider
+      value={{
+        comments: [showComments, toggleComments],
+        add: [showAddPosts, toggleAddPost],
+      }}
+    >
+      <div>
+        {/* <p>{!posts ? "Loading..." : posts}</p> */}
+        <HomeNavbar />
+        {/*
+        <Button onClick={() => toggleAddPost(true)} className="inner-header">
+          new post
+        </Button>
+         {showAddPosts ? <AddPost /> : null} */}
+        <AddPost />
+        {renderedPostList}
+      </div>
+    </ShowContext.Provider>
   );
 };
 

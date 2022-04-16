@@ -13,14 +13,14 @@ const Navbar = () => {
       <Link to="/">
         Login
       </Link> |{" "}
+      <Link to="/register">
+        Sign Up
+      </Link> |{" "}
       <Link to="/profile">
         Profile
       </Link> |{" "}
       <Link to="/home">
         Home
-      </Link> |{" "}
-      <Link to="/register">
-        Sign Up
       </Link> |{" "}
      
         

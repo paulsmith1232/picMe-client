@@ -19,9 +19,9 @@ export default function App() {
         <Routes>
           {/* if logged in */}
           <Route path="/" element={<Login />} />
+          <Route path="register" element={<SignUp />} />
           <Route path="profile" element={<Profile />} />        
           <Route path="home" element={<Home />} />
-          <Route path="register" element={<SignUp />} />
 
           {/* if not logged in 
           <Route path="/" element={<Login />} /> */}
