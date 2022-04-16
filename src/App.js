@@ -1,8 +1,9 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';import Navbar from './Navbar';
-import Login from './Login';
-import Home from './Home';
-import Profile from './Profile';
+import { Routes, Route } from 'react-router-dom';import Navbar from './components/Navbar';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import SignUp from './pages/Signup';
 import { Container } from 'semantic-ui-react';
 import './App.css'
 
@@ -17,9 +18,10 @@ export default function App() {
       <Container  className='width-adjust'>
         <Routes>
           {/* if logged in */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="profile" element={<Profile />} />        
-          <Route path="login" element={<Login />} />
+          <Route path="home" element={<Home />} />
+          <Route path="register" element={<SignUp />} />
 
           {/* if not logged in 
           <Route path="/" element={<Login />} /> */}

@@ -11,13 +11,16 @@ const Navbar = () => {
       }}
     >
       <Link to="/">
-        Home
+        Login
       </Link> |{" "}
       <Link to="/profile">
         Profile
       </Link> |{" "}
-      <Link to="/login">
-        Login
+      <Link to="/home">
+        Home
+      </Link> |{" "}
+      <Link to="/register">
+        Sign Up
       </Link> |{" "}
      
         

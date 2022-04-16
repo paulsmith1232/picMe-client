@@ -1,6 +1,10 @@
-import React from 'react';
-import HomeNavbar from './HomeNavbar';
-import PostMain from './PostMain';
+import React, { useEffect, useState } from 'react';
+import HomeNavbar from '../components/HomeNavbar';
+import PostMain from '../components/PostMain';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+
 
 // The main feed component - will serve as the homepage
 
@@ -45,11 +49,42 @@ const postData = [
 ]
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  const [posts, setPosts] = React.useState(null);
+  const [userName, setUsername] = useState("");
+
+
+  useEffect(() => {
+    var token = localStorage.getItem("my_user_token");
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace("-", "+").replace("_", "/");
+    setUsername(JSON.parse(atob(base64)).username);
+    var config = {
+      method: "get",
+      url: `${process.env.REACT_APP_BE}/posts`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("my_user_token")}`
+      }
+    };
+
+    axios(config)
+      .then(function (response) {
+        setPosts(response.data);
+      })
+      .catch(function (error) {
+        navigate("/");
+        console.log(error);
+      });
+  }, []);
+
   const renderedPostList = postData.map((post) => {
     return <PostMain key={post.id} postData={post} />
   })
+
   return (
     <div>
+      <p>{!posts ? "Loading..." : posts}</p>
       <HomeNavbar />
       {renderedPostList}
 

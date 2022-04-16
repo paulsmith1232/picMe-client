@@ -9,7 +9,6 @@ import './PostMain.css';
 const PostMain = ({postData}) => {
   // const commentList = postData.comments.map((comment) => {
 
-  console.log(postData);
   const picture = postData.img;
   return (
     <Segment >

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 // Login component 
 // Handles the logging in of users
 const Login = () => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
@@ -16,6 +19,29 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault(); // called to prevent page from re-rendering on form submission    
 
+    var data = JSON.stringify({
+      username,
+      password
+    });
+
+    var config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BE}/users/login`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      data: data
+    };
+
+    axios(config) // uses axios to send the request to the server
+      .then(function (response) {
+        localStorage.setItem("my_user_token", response.data.token); // takes the response data's token and stores it in localstorage
+        navigate("/home");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   // returned JSX
