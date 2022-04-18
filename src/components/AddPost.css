@@ -30,3 +30,7 @@
 .error{
   color: crimson;
 }
+
+.post-button{
+  margin-top: 20px !important;
+}

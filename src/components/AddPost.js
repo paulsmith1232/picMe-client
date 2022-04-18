@@ -3,7 +3,8 @@ import axios from "axios";
 import FileBase64 from "react-file-base64";
 import { ShowContext } from "./showContext";
 import "./AddPost.css"
-import { Button, Item, Modal } from "semantic-ui-react";
+import { Button, Form, Modal, Image } from "semantic-ui-react";
+
 const AddPost = () => {
   const cardRef = useRef();
 
@@ -43,46 +44,42 @@ const AddPost = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // var token = localStorage.getItem("my_user_token");
-    // var base64Url = token.split(".")[1];
-    // var base64 = base64Url.replace("-", "+").replace("_", "/");
-    // var userId = JSON.parse(atob(base64)).id;
+    var token = localStorage.getItem("my_user_token");
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace("-", "+").replace("_", "/");
+    var userId = JSON.parse(atob(base64)).id;
 
-    // var data = JSON.stringify({
-    //   caption,
-    //   image: picture.base64
-    // });
+    console.log(userId);
+    var data = JSON.stringify({
+      caption,
+      image: picture.base64
+    });
 
-    // var config = {
-    //   method: "post",
-    //   url: `${process.env.REACT_APP_BE}/posts/add/${userId}`,
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     Authorization: `Bearer ${localStorage.getItem("my_user_token")}`
-    //   },
-    //   data: data
-    // };
+    var config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BE}/posts/add/${userId}`,
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("my_user_token")}`
+      },
+      data: data
+    };
 
-    // axios(config)
-    //   .then(function(response) {
-    //         toggleAddPost(!showAddPosts);
-
-    //   })
-    //   .catch(function(error) {
-    //     console.log(error);
-    //   });
-    console.log("test")
-    
+    axios(config)
+      .then(function(response) {
+        toggleAddPost(!showAddPosts);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });    
 
   };
   return (
-    // <div onClick={() => setClickState(!clickState)} className="comments-modal">
-    <Modal onClick={() => setClickState(!clickState)} onClose={() => setOpen(false)} onOpen={() => setOpen(true)}  open={open} className="comments-modal" trigger={<Button>Show Modal</Button>}>
+    <Modal onClick={() => setClickState(!clickState)} onClose={() => setOpen(false)} onOpen={() => setOpen(true)}  open={open} className="comments-modal" trigger={<Button className="post-button">Add Post</Button>}>
       <div ref={cardRef} className="comment-card">
         <div
-          className="comment-img add-post"
-          
+          className="comment-img add-post"          
         >
           {showError && <p className="error">File must be less 2mb</p>}
           {!picture
@@ -92,23 +89,23 @@ const AddPost = () => {
               </span>}
         </div>
         {picture ?
-          <Item >
-            <Item.Image size='medium' src={picture.base64} ></Item.Image> 
-          </Item>
+          
+            <Image centered={true} size='medium' src={picture.base64} ></Image> 
           :
           null
         }
 
         <div className="comments-main">
-          <form onSubmit={e => handleSubmit(e)} className="form">
+          <Form onSubmit={e => handleSubmit(e)} className="form">
             <input
               onChange={e => setCaption(e.target.value)}
               placeholder="say something..."
               className="form-input"
               type="text"
             />
+            
             <Button>Submit</Button>
-          </form>
+          </Form>
         </div>
       </div>
     </Modal>

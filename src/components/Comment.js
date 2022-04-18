@@ -3,13 +3,18 @@ import React, { useContext, useRef, useEffect, useState } from "react";
 import { ShowContext } from "./showContext";
 import UserComment from "./UserComment";
 import axios from "axios";
+import { Modal, Button } from "semantic-ui-react";
+
 const Comment = () => {
   const { comments } = useContext(ShowContext);
   const [showComments, toggleComments] = comments
   const [clickState, setClickState] = useState(false);
   const [content, setContent] = useState("");
   const cardRef = useRef();
-  console.log(showComments);
+
+
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     function handleClickOutside(event) {
       if (cardRef.current && !cardRef.current.contains(event.target)) {
@@ -28,7 +33,7 @@ const Comment = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    var postId = showComments.post._id;
+    var postId = showComments.postData._id;
     var token = localStorage.getItem("my_user_token");
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace("-", "+").replace("_", "/");
@@ -58,12 +63,12 @@ const Comment = () => {
   };
 
   return (
-    <div onClick={() => setClickState(!clickState)} className="comments-modal">
+    <Modal onClick={() => setClickState(!clickState)} onClose={() => setOpen(false)} onOpen={() => setOpen(true)}  open={open} className="comments-modal" trigger={<Button className="post-button">Show Comments</Button>}>
       <div ref={cardRef} className="comment-card">
         <div
           className="comment-img"
           style={{
-            background: `url(${showComments.post.image})`,
+            background: `url(${showComments.postData.image})`,
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             backgroundSize: "cover"
@@ -71,9 +76,9 @@ const Comment = () => {
         ></div>
         <div className="comments-main">
           <div className="post-card-header">
-            {showComments.post.username}
+            {showComments.postData.username}
           </div>
-          {showComments.post.comments.map((ele, i) => {
+          {showComments.postData.comments.map((ele, i) => {
             return <UserComment key={i} item={ele} />;
           })}
           <form onSubmit={(e) => handleSubmit(e)} className="form">
@@ -86,7 +91,7 @@ const Comment = () => {
           </form>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 };
 export default Comment;

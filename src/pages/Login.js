@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // Login component 
 // Handles the logging in of users
@@ -38,7 +38,7 @@ const Login = () => {
       .then(function (response) {
         localStorage.setItem("my_user_token", response.data.token); // takes the response data's token and stores it in localstorage
         console.log(response);
-       // navigate("/home");
+        navigate("/home");
       })
       .catch(function (error) {
         console.log(error);
@@ -84,7 +84,7 @@ const Login = () => {
           </Segment>
         </Form>
         <Message>
-          Don't have an account? <a href="#">Sign Up</a>
+          Don't have an account? <Link to="/register">Sign Up</Link>
         </Message>
       </Grid.Column>
     </Grid>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // SignUp component 
 // Handles the logging in of users
@@ -37,7 +37,7 @@ const SignUp = () => {
       .then(function (response) {
         localStorage.setItem("my_user_token", response.data.token);
         console.log(response);
-       // navigate("/home");
+        navigate("/home");
       })
       .catch(function (error) {
         console.log(error);
@@ -53,12 +53,12 @@ const SignUp = () => {
           color="red"
           textAlign="center"
           style={{
-            fontSize: "6em",
+            fontSize: "4em",
             fontWeight: "normal",
             marginBottom: "5px",
           }}
         >
-          PicMe
+          PicMe Registration
         </Header>
         <Form size="large" onSubmit={onSubmit}>
           <Segment stacked>
@@ -83,7 +83,7 @@ const SignUp = () => {
           </Segment>
         </Form>
         <Message>
-          Already have an account? <a href="#">Login</a>
+          Already have an account? <Link to="/">Login</Link>
         </Message>
       </Grid.Column>
     </Grid>

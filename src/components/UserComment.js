@@ -24,9 +24,8 @@ const UserComment = (item) => {
     <div className="comment-line">
       {comment ? (
         <>
-          {/* <img src={profile} className="avatar" /> */}
-          {comment.username}
-          <span className="user-comment">{comment.content}</span>
+          User: {comment.username}  
+          Comment: <span className="user-comment">{comment.content}</span>
         </>
       ) : null}
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu, Segment } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react'
 
 const HomeNavbar = () => {
   const [activeItem, setActiveItem] = useState('explore');
@@ -23,13 +23,6 @@ const HomeNavbar = () => {
           active={activeItem === 'favourites'}
           onClick={handleItemClick}
         />
-        {/* <Menu.Menu position='right'>
-          <Menu.Item
-            name='logout'
-            active={activeItem === 'logout'}
-            onClick={handleItemClick}
-          />
-        </Menu.Menu> */}
       </Menu>
     </div>
   )    
