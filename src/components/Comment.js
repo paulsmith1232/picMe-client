@@ -32,6 +32,7 @@ const Comment = () => {
   }, [clickState, toggleComments]);
 
   const handleSubmit = (e) => {
+    console.log('submitting')
     e.preventDefault();
     var postId = showComments.postData._id;
     var token = localStorage.getItem("my_user_token");
