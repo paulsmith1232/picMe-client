@@ -1,3 +1,11 @@
+/*
+* FILE          :   Signup.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The registration screen for the application
+*/
 import React, { useState, useEffect } from "react";
 import { Button, Form, Grid, Header, Message, Segment } from "semantic-ui-react";
 import axios from "axios";
@@ -10,10 +18,6 @@ const SignUp = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   
-  // runs whenever the results state is updated
-  useEffect(() => {
-    console.log(password);
-  }, [password]); 
 
   // handles form submission
   const onSubmit = async (e) => {

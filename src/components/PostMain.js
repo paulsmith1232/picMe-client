@@ -1,10 +1,15 @@
+/*
+* FILE          :   PostMain.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The post display for the home screen.
+*/
 import React, { useContext } from 'react'
 import { Card, Grid, Icon, Image, Segment, Comment, Header } from 'semantic-ui-react'
 import './PostMain.css';
 import { ShowContext } from './showContext';
-
-
-
 
 const PostMain = ({postData}) => {
   const { comments } = useContext(ShowContext);
@@ -16,6 +21,7 @@ const PostMain = ({postData}) => {
     });
   };
 
+  // post construted from various semantic-ui-react components
   return (
     <Segment >
       <Grid container>

@@ -1,3 +1,12 @@
+/*
+* FILE          :   Home.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The primary screen of the app. Houses the main
+*                   content feed of posts.
+*/
 import React, { useEffect, useState } from 'react';
 import PostMain from '../components/PostMain';
 import Comment from '../components/Comment';
@@ -7,17 +16,12 @@ import { useNavigate } from "react-router-dom";
 import { ShowContext } from '../components/showContext';
 
 // The main feed component - will serve as the homepage
-
 const Home = () => {
   const navigate = useNavigate();
-
   const [posts, setPosts] = React.useState([]);
   const [userName, setUsername] = useState("");
-
   const [showComments, toggleComments] = useState(false);
   const [showAddPosts, toggleAddPost] = useState(false);
-
-
 
   useEffect(() => {   
     if(posts.length === 0){
@@ -47,13 +51,9 @@ const Home = () => {
         console.log(error);
       });
   }
-
-  useEffect(()=>{
-    
-  },[showAddPosts])
-
-
-  
+  // called whenever the user clicks the add posts button
+  useEffect(()=>{    
+  },[showAddPosts]) 
 
   const renderedPostList = posts.map((post, i) => {
     return <PostMain key={i} postData={post} />

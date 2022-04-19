@@ -1,3 +1,11 @@
+/*
+* FILE          :   Navbar.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   Navbar component for the application.
+*/
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Button } from 'semantic-ui-react';
@@ -13,11 +21,13 @@ const Navbar = () => {
   const [activeItem, setActiveItem] = useState('explore');
   const handleItemClick = (e, { name }) => setActiveItem( name );
 
+  // logs user out by deleting their localstorage session
   const handleLogout = () => {
     localStorage.removeItem("my_user_token");
     navigate("/");
   };
 
+  // combines semantic-ui-react components with react router
   return (
     <Menu pointing
       style={{

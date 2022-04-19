@@ -1,3 +1,12 @@
+/*
+* FILE          :   App.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The top level component of the application. Houses the
+*                   routing logic
+*/
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';import Navbar from './components/Navbar';
 import Login from './pages/Login';
@@ -13,19 +22,13 @@ import './App.css'
 export default function App() {
   return (
     <div className="App">
-      {/* <h1>App</h1> */}
       <Navbar />  
       <Container  className='width-adjust'>
         <Routes>
-          {/* if logged in */}
           <Route path="/" element={<Login />} />
           <Route path="register" element={<SignUp />} />
           <Route path="profile" element={<Profile />} />        
           <Route path="home" element={<Home />} />
-
-          {/* if not logged in 
-          <Route path="/" element={<Login />} /> */}
-
         </Routes>
       </Container>    
     </div>

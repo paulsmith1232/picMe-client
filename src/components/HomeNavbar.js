@@ -1,3 +1,12 @@
+/*
+* FILE          :   HomeNavbar.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The navbar component for the home screen.
+*                   No longer in use
+*/
 import React, { useState } from 'react'
 import { Menu } from 'semantic-ui-react'
 

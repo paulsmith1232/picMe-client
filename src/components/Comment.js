@@ -1,5 +1,13 @@
+/*
+* FILE          :   Comment.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The comment component. Handles comment submission
+*                   to the database.
+*/
 import React, { useContext, useRef, useEffect, useState } from "react";
-
 import { ShowContext } from "./showContext";
 import UserComment from "./UserComment";
 import axios from "axios";
@@ -11,10 +19,9 @@ const Comment = () => {
   const [clickState, setClickState] = useState(false);
   const [content, setContent] = useState("");
   const cardRef = useRef();
-
-
   const [open, setOpen] = useState(false);
 
+  // Called whenever the clickstate changes or the comments are toggled
   useEffect(() => {
     function handleClickOutside(event) {
       if (cardRef.current && !cardRef.current.contains(event.target)) {
@@ -25,14 +32,15 @@ const Comment = () => {
       }
     }
 
+    // adds the event listener to handle clicks outside of comment modal
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [clickState, toggleComments]);
 
+  // handles database comment posts
   const handleSubmit = (e) => {
-    console.log('submitting')
     e.preventDefault();
     var postId = showComments.postData._id;
     var token = localStorage.getItem("my_user_token");
@@ -77,7 +85,7 @@ const Comment = () => {
         ></div>
         <div className="comments-main">
           <div className="post-card-header">
-            {showComments.postData.username}
+            {showComments.postData.username} 
           </div>
           {showComments.postData.comments.map((ele, i) => {
             return <UserComment key={i} item={ele} />;

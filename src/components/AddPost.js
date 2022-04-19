@@ -1,3 +1,12 @@
+/*
+* FILE          :   AddPost.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The client for the PicMe application. It produces a list of posts
+*                   for users to add to and comment on, positng images of their own.
+*/
 import React, { useRef, useEffect, useState, useContext } from "react";
 import axios from "axios";
 import FileBase64 from "react-file-base64";
@@ -7,16 +16,15 @@ import { Button, Form, Modal, Image } from "semantic-ui-react";
 
 const AddPost = () => {
   const cardRef = useRef();
-
   const { add } = useContext(ShowContext);
   const [showAddPosts, toggleAddPost] = add;
   const [clickState, setClickState] = useState(false);
   const [picture, setPicture] = useState(null);
   const [caption, setCaption] = useState("");
   const [showError, setShowError] = useState(false);
-
   const [open, setOpen] = useState(false);
 
+  // called whenever the clickstate changes to handle clicking outside of the modal
   useEffect(
     () => {
       function handleClickOutside(event) {
@@ -32,6 +40,7 @@ const AddPost = () => {
     [clickState]
   );
 
+  // handles the accessing of files on the system
   function getFile(file) {
     var exp = /\d+/;
     if (file.size.match(exp)[0] > 2000) {
@@ -42,6 +51,7 @@ const AddPost = () => {
     }
   }
 
+  // handles the submission of posts to the database
   const handleSubmit = e => {
     e.preventDefault();
     var token = localStorage.getItem("my_user_token");

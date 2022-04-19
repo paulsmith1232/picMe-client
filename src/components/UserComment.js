@@ -1,3 +1,11 @@
+/*
+* FILE          :   UserComment.js
+* PROJECT       :   SENG3080 - Group Project
+* PROGRAMMER    :   Paul Smith
+* STUDENT #     :   7964422
+* FIRST VERSION :   2022-04-18
+* DESCRIPTION   :   The comment component to be displayed in the comment modal
+*/
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
