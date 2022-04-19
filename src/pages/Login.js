@@ -71,7 +71,7 @@ const Login = () => {
               fluid
               icon="user"
               iconPosition="left"
-              placeholder="E-mail address"
+              placeholder="Uesrname"
               onChange={(e)=> setUsername(e.target.value)}
             />
             <Form.Input
